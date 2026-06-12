@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alqemam Estate Agents | القمم للعقارات</title>
+    <meta name="description" content="Premium real estate services in Riyadh, Saudi Arabia. Trusted by clients with a 4.6-star rating.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Using Phosphor Icons for a clean, premium look -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a', // Slate 900 - Deep navy/black
+                            light: '#f8fafc', // Slate 50 - Off white
+                            gold: '#cda873', // Elegant muted gold
+                            goldDark: '#b08d55',
+                        }
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 30px -10px rgba(0, 0, 0, 0.1)',
+                        'premium-hover': '0 20px 40px -10px rgba(0, 0, 0, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --gold-gradient: linear-gradient(135deg, #cda873 0%, #b08d55 100%);
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Custom Text Gradient */
+        .text-gradient {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Image Hover Zoom effect */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom-container img {
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .img-zoom-container:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Navigation transition */
+        #navbar {
+            transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+        }
+        .nav-scrolled {
+            background-color: rgba(15, 23, 42, 0.95) !important;
+            backdrop-filter: blur(10px);
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-sans text-brand-dark bg-brand-light antialiased">
+
+    <header id="navbar" class="fixed w-full top-0 z-50 py-6 transition-all duration-300 text-white bg-gradient-to-b from-black/70 to-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer">
+                    <i class="ph ph-buildings text-brand-gold text-3xl"></i>
+                    <div>
+                        <h1 class="font-serif text-2xl font-bold leading-tight">Alqemam</h1>
+                        <p class="text-[10px] tracking-widest text-brand-gold uppercase">القمم للعقارات</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center text-sm font-medium">
+                    <a href="#home" class="hover:text-brand-gold transition-colors">Home</a>
+                    <a href="#about" class="hover:text-brand-gold transition-colors">About Us</a>
+                    <a href="#portfolio" class="hover:text-brand-gold transition-colors">Portfolio</a>
+                    <a href="#services" class="hover:text-brand-gold transition-colors">Services</a>
+                    <a href="#contact" class="px-6 py-2.5 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white transition-all duration-300 rounded-full">Contact Us</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-2xl focus:outline-none" onclick="toggleMobileMenu()">
+                    <i class="ph ph-list"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel (Hidden by default) -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-brand-dark shadow-xl flex flex-col p-6 space-y-4">
+            <a href="#home" class="hover:text-brand-gold transition-colors" onclick="toggleMobileMenu()">Home</a>
+            <a href="#about" class="hover:text-brand-gold transition-colors" onclick="toggleMobileMenu()">About Us</a>
+            <a href="#portfolio" class="hover:text-brand-gold transition-colors" onclick="toggleMobileMenu()">Portfolio</a>
+            <a href="#services" class="hover:text-brand-gold transition-colors" onclick="toggleMobileMenu()">Services</a>
+            <a href="#contact" class="text-brand-gold" onclick="toggleMobileMenu()">Contact Us</a>
+        </div>
+    </header>
+
+    <section id="home" class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+        <!-- Background Image (Using the clearest daylight storefront image to establish the actual location) -->
+        <div class="absolute inset-0 z-0">
+            <img src="image_bda720.jpg" alt="Alqemam Estate Agents Office Riyadh" class="w-full h-full object-cover object-center" />
+            <div class="absolute inset-0 bg-brand-dark/70"></div> <!-- Dark overlay for text readability -->
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16">
+            <span class="block text-brand-gold font-medium tracking-[0.2em] uppercase mb-4 reveal">Riyadh's Premier Real Estate</span>
+            <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 reveal delay-100">
+                Discover Excellence in <br/><span class="text-gradient">Property Investment</span>
+            </h2>
+            <p class="text-gray-300 text-lg md:text-xl mb-10 max-w-2xl mx-auto reveal delay-200">
+                Guided by integrity and expertise, we connect you with exceptional commercial and residential properties across Saudi Arabia.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4 reveal delay-300">
+                <a href="#portfolio" class="px-8 py-4 bg-brand-gold text-white font-medium rounded-full hover:bg-brand-goldDark transition-colors shadow-lg shadow-brand-gold/20">Explore Portfolio</a>
+                <a href="#about" class="px-8 py-4 bg-white/10 text-white font-medium rounded-full backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors">Our Story</a>
+            </div>
+        </div>
+
+        <!-- Floating Stats Bar (Inspired by reference images) -->
+        <div class="absolute bottom-0 left-0 w-full translate-y-1/2 z-20 hidden md:block px-4">
+            <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-premium p-8 flex justify-between items-center divide-x divide-gray-100 reveal delay-300">
+                <div class="flex-1 text-center px-4">
+                    <p class="font-serif text-4xl font-bold text-brand-dark mb-1">4.6<span class="text-brand-gold text-2xl">★</span></p>
+                    <p class="text-sm text-gray-500 uppercase tracking-wider">Google Rating</p>
+                </div>
+                <div class="flex-1 text-center px-4">
+                    <p class="font-serif text-4xl font-bold text-brand-dark mb-1">49+</p>
+                    <p class="text-sm text-gray-500 uppercase tracking-wider">Verified Reviews</p>
+                </div>
+                <div class="flex-1 text-center px-4">
+                    <p class="font-serif text-4xl font-bold text-brand-dark mb-1">Riyadh</p>
+                    <p class="text-sm text-gray-500 uppercase tracking-wider">Prime Location</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 md:py-32 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Side -->
+                <div class="relative reveal img-zoom-container rounded-2xl shadow-premium">
+                    <!-- Using the older sign image to represent history/establishment -->
+                    <img src="image_bda6e6.jpg" alt="Alqemam Office History" class="w-full h-auto rounded-2xl object-cover aspect-[4/3]" />
+                    
+                    <!-- Floating badge -->
+                    <div class="absolute -bottom-6 -right-6 bg-brand-dark text-white p-6 rounded-xl shadow-xl max-w-xs border border-brand-gold/30">
+                        <i class="ph-fill ph-quotes text-brand-gold text-3xl mb-2"></i>
+                        <p class="text-sm italic text-gray-300">"Excellent office... They are God-fearing and have a respectful approach."</p>
+                        <p class="text-xs text-brand-gold mt-2 font-semibold">- Abdulrhman S.</p>
+                    </div>
+                </div>
+
+                <!-- Text Side -->
+                <div class="reveal delay-100">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-12 h-[1px] bg-brand-gold"></div>
+                        <span class="text-brand-gold font-medium tracking-wider uppercase text-sm">About Our Agency</span>
+                    </div>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold text-brand-dark mb-6">
+                        Building Trust Through <span class="text-gradient">Transparency</span>
+                    </h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Located in the heart of Ar Rayyan, Riyadh, Alqemam Estate Agents (القمم للعقارات) has built a reputation on unwavering integrity and deep market knowledge. We understand that real estate decisions are among the most significant in our clients' lives.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Our philosophy, echoed by our clients, is simple: operate with respect, fear God in our dealings, and treat every property journey as if it were our own. This dedication to ethical practice is why our clients say the world would be a better place if everyone operated this way.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <i class="ph-fill ph-check-circle text-brand-gold text-xl shrink-0 mt-0.5"></i>
+                            <span class="text-brand-dark font-medium">Highly rated local experts (4.6/5 Stars)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="ph-fill ph-check-circle text-brand-gold text-xl shrink-0 mt-0.5"></i>
+                            <span class="text-brand-dark font-medium">Transparent and respectful communication</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="ph-fill ph-check-circle text-brand-gold text-xl shrink-0 mt-0.5"></i>
+                            <span class="text-brand-dark font-medium">Comprehensive commercial & residential services</span>
+                        </li>
+                    </ul>
+
+                    <a href="#contact" class="inline-flex items-center gap-2 text-brand-dark font-bold border-b-2 border-brand-gold pb-1 hover:text-brand-gold transition-colors">
+                        Speak with a Consultant <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Note: Strictly using provided images. Styling them as commercial/agency portfolio items to avoid empty/fake property cards while maintaining the design requirement. -->
+    <section id="portfolio" class="py-24 bg-brand-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <span class="text-brand-gold font-medium tracking-wider uppercase text-sm block mb-2">Our Presence</span>
+                <h2 class="font-serif text-4xl font-bold text-brand-dark mb-4">Commercial Portfolio</h2>
+                <p class="text-gray-600">A look at our established commercial locations, demonstrating our prominent presence in the Riyadh real estate market.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl shadow-premium hover:shadow-premium-hover transition-shadow duration-300 group reveal">
+                    <div class="relative h-64 img-zoom-container rounded-t-2xl">
+                        <!-- Image 1 -->
+                        <img src="image_bda720.jpg" alt="Alqemam Headquarters Day" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-brand-dark shadow-sm">
+                            Headquarters
+                        </div>
+                    </div>
+                    <div class="p-6 border-t border-gray-100">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-brand-dark group-hover:text-brand-gold transition-colors">Main Office - Ar Rayyan</h3>
+                                <p class="text-gray-500 text-sm mt-1"><i class="ph ph-map-pin mr-1"></i>Eastern Ring Branch Rd</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 border-t border-gray-100 pt-4 mt-4 text-sm text-gray-600">
+                            <div class="flex items-center gap-2">
+                                <i class="ph ph-door text-brand-gold text-lg"></i> Prime Access
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="ph ph-car text-brand-gold text-lg"></i> Client Parking
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl shadow-premium hover:shadow-premium-hover transition-shadow duration-300 group reveal delay-100">
+                    <div class="relative h-64 img-zoom-container rounded-t-2xl">
+                        <!-- Image 2 -->
+                        <img src="image_bda6ad.jpg" alt="Alqemam Headquarters Night" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-brand-dark/90 text-brand-gold backdrop-blur px-3 py-1 rounded-full text-xs font-bold shadow-sm">
+                            Evening Operations
+                        </div>
+                    </div>
+                    <div class="p-6 border-t border-gray-100">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-brand-dark group-hover:text-brand-gold transition-colors">Alqemam After Hours</h3>
+                                <p class="text-gray-500 text-sm mt-1"><i class="ph ph-clock mr-1"></i>Dedicated Service</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 border-t border-gray-100 pt-4 mt-4 text-sm text-gray-600">
+                            <div class="flex items-center gap-2">
+                                <i class="ph ph-moon-stars text-brand-gold text-lg"></i> Extended Hours
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="ph ph-phone-call text-brand-gold text-lg"></i> Always Available
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl shadow-premium hover:shadow-premium-hover transition-shadow duration-300 group reveal delay-200">
+                    <div class="relative h-64 img-zoom-container rounded-t-2xl">
+                        <!-- Image 3 -->
+                        <img src="image_bda6e6.jpg" alt="Alqemam Historic Location" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-gray-100/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-brand-dark shadow-sm">
+                            Established Site
+                        </div>
+                    </div>
+                    <div class="p-6 border-t border-gray-100">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-brand-dark group-hover:text-brand-gold transition-colors">Al Fares Partnership Complex</h3>
+                                <p class="text-gray-500 text-sm mt-1"><i class="ph ph-buildings mr-1"></i>Commercial Hub</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 border-t border-gray-100 pt-4 mt-4 text-sm text-gray-600">
+                            <div class="flex items-center gap-2">
+                                <i class="ph ph-briefcase text-brand-gold text-lg"></i> B2B Network
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="ph ph-handshake text-brand-gold text-lg"></i> Strategic Location
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-brand-dark text-white relative overflow-hidden">
+        <!-- Abstract subtle background pattern -->
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#cda873 1px, transparent 1px); background-size: 30px 30px;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <span class="text-brand-gold font-medium tracking-wider uppercase text-sm block mb-2">What We Do</span>
+                <h2 class="font-serif text-4xl font-bold mb-4">Premium Estate Services</h2>
+                <p class="text-gray-400">Comprehensive real estate solutions tailored to your investment and lifestyle needs in Saudi Arabia.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-gold/50 hover:bg-white/10 transition-all duration-300 group reveal">
+                    <div class="w-14 h-14 rounded-full bg-brand-gold/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-house-line text-brand-gold text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-3">Property Sales</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Expert guidance in buying and selling premium residential and commercial properties.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-gold/50 hover:bg-white/10 transition-all duration-300 group reveal delay-100">
+                    <div class="w-14 h-14 rounded-full bg-brand-gold/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-keys text-brand-gold text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-3">Luxury Rentals</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Curated selection of high-end apartments, villas, and commercial spaces for lease.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-gold/50 hover:bg-white/10 transition-all duration-300 group reveal delay-200">
+                    <div class="w-14 h-14 rounded-full bg-brand-gold/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-clipboard-text text-brand-gold text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-3">Property Management</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Comprehensive management services ensuring your investment is protected and profitable.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-gold/50 hover:bg-white/10 transition-all duration-300 group reveal delay-300">
+                    <div class="w-14 h-14 rounded-full bg-brand-gold/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph ph-chart-line-up text-brand-gold text-2xl"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold mb-3">Investment Consulting</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Strategic advice for real estate portfolios to maximize returns in the Riyadh market.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+                <div class="lg:col-span-1 reveal">
+                    <span class="text-brand-gold font-medium tracking-wider uppercase text-sm block mb-2">Testimonials</span>
+                    <h2 class="font-serif text-4xl font-bold text-brand-dark mb-6">What Our Clients Say</h2>
+                    <p class="text-gray-600 mb-6">With a 4.6-star rating based on nearly 50 reviews, our reputation is built on trust, respect, and exceptional service.</p>
+                    <a href="https://maps.google.com/?cid=YOUR_CID_HERE" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-brand-dark font-medium rounded-full transition-colors">
+                        <i class="ph-fill ph-google-logo text-blue-500"></i> Read all Google Reviews
+                    </a>
+                </div>
+                
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Review 1 -->
+                    <div class="bg-brand-light p-8 rounded-2xl relative reveal delay-100">
+                        <i class="ph-fill ph-quotes text-brand-gold/20 text-6xl absolute top-4 right-4"></i>
+                        <div class="flex text-brand-gold mb-4">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p class="text-gray-700 italic mb-6 relative z-10">"If everyone in the world treated things the same way as the owners of this office, the world would be a better place. May God bless them and increase the number of people like them."</p>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <div class="w-10 h-10 rounded-full bg-brand-dark text-white flex items-center justify-center font-bold">B</div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark">B.A.K</h4>
+                                <p class="text-xs text-gray-500">Local Guide</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="bg-brand-light p-8 rounded-2xl relative reveal delay-200">
+                        <i class="ph-fill ph-quotes text-brand-gold/20 text-6xl absolute top-4 right-4"></i>
+                        <div class="flex text-brand-gold mb-4">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p class="text-gray-700 italic mb-6 relative z-10">"Excellent office, I recommend dealing with them. They are God-fearing and have a respectful approach."</p>
+                        <div class="flex items-center gap-3 mt-auto">
+                            <div class="w-10 h-10 rounded-full bg-brand-gold text-white flex items-center justify-center font-bold">A</div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark">Abdulrhman S.</h4>
+                                <p class="text-xs text-gray-500">Local Guide</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-brand-light border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-3xl shadow-premium overflow-hidden flex flex-col lg:flex-row">
+                
+                <!-- Contact Info Left -->
+                <div class="bg-brand-dark text-white p-12 lg:w-2/5 relative overflow-hidden">
+                    <!-- Decor -->
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                    
+                    <h3 class="font-serif text-3xl font-bold mb-2">Get in Touch</h3>
+                    <p class="text-gray-400 mb-10">We are ready to assist you with your real estate inquiries.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                <i class="ph ph-map-pin text-brand-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Office Location</h4>
+                                <p class="text-sm text-gray-300">Eastern Ring Branch Rd, Ar Rayyan<br>Riyadh 14211, Saudi Arabia</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                <i class="ph ph-phone text-brand-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Contact Numbers</h4>
+                                <p class="text-sm text-gray-300" id="phone1">+966 55 491 7171</p>
+                                <p class="text-sm text-gray-300" id="phone2">+966 53 491 7171</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                <i class="ph ph-clock text-brand-gold text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Business Hours</h4>
+                                <p class="text-sm text-gray-300">Saturday - Thursday<br>Opens 9:00 AM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Right -->
+                <div class="p-12 lg:w-3/5">
+                    <form onsubmit="event.preventDefault(); showMessage();" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all bg-gray-50 focus:bg-white" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" required class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all bg-gray-50 focus:bg-white" placeholder="+966 5X XXX XXXX">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Interest</label>
+                            <select class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all bg-gray-50 focus:bg-white">
+                                <option>Buying Property</option>
+                                <option>Selling Property</option>
+                                <option>Renting/Leasing</option>
+                                <option>Property Management</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all bg-gray-50 focus:bg-white" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-dark text-white font-bold py-4 rounded-lg hover:bg-brand-gold transition-colors shadow-lg">Send Inquiry</button>
+                    </form>
+                    
+                    <!-- Custom Message Box (Replacing alert) -->
+                    <div id="successMessage" class="hidden mt-4 p-4 bg-green-50 text-green-800 rounded-lg border border-green-200 flex items-center gap-3">
+                        <i class="ph-fill ph-check-circle text-xl"></i>
+                        <p>Thank you! Your inquiry has been sent. Our team will contact you shortly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-gray-400 py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="ph ph-buildings text-brand-gold text-2xl"></i>
+                        <div>
+                            <h2 class="font-serif text-xl font-bold text-white leading-tight">Alqemam</h2>
+                            <p class="text-[9px] tracking-widest text-brand-gold uppercase">القمم للعقارات</p>
+                        </div>
+                    </div>
+                    <p class="text-sm max-w-sm mb-4">Your trusted partner for premium real estate services in Riyadh. Built on integrity, transparency, and deep market expertise.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 font-serif">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="hover:text-brand-gold transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-brand-gold transition-colors">About Us</a></li>
+                        <li><a href="#portfolio" class="hover:text-brand-gold transition-colors">Portfolio</a></li>
+                        <li><a href="#services" class="hover:text-brand-gold transition-colors">Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 font-serif">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>Eastern Ring Branch Rd</li>
+                        <li>Ar Rayyan, Riyadh</li>
+                        <li>Saudi Arabia</li>
+                        <li class="mt-4"><a href="tel:+966554917171" class="text-brand-gold hover:text-white transition-colors">+966 55 491 7171</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
+                <p>&copy; 2026 Alqemam Estate Agents. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-brand-gold transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-brand-gold transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // Form Submission Message
+        function showMessage() {
+            const msg = document.getElementById('successMessage');
+            msg.classList.remove('hidden');
+            setTimeout(() => {
+                msg.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Intersection Observer for Scroll Animations
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: stop observing once animated to keep it visible
+                        // observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
